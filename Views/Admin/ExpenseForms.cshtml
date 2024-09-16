@@ -1,0 +1,97 @@
+﻿@*@model IEnumerable<ExpenseApplication.Models.ExpenseForm>*@
+@using PagedList.Mvc;
+@model PagedList.IPagedList<ExpenseApplication.Models.ExpenseForm>
+
+
+@{
+    ViewBag.Title = "Expense Forms for Admin";
+}
+
+@using (Html.BeginForm("ExpenseForms", "Admin", FormMethod.Get))
+{
+    <div class="form-group row">
+        <div class="col-md-2">
+            <label for="DateSubmitted">Date Submitted:</label>
+            <input type="date" name="DateSubmitted" id="DateSubmitted" class="form-control" value="@Request.QueryString["DateSubmitted"]" />
+        </div>
+        <div class="col-md-2">
+            <label for="Status">Status:</label>
+            <select name="Status" id="Status" class="form-control">
+                <option value="">-- Select Status --</option>
+                <option value="Approved" @(Request.QueryString["Status"] == "Approved" ? "selected" : "")>Approved</option>
+                <option value="PendingApproval" @(Request.QueryString["Status"] == "PendingApproval" ? "selected" : "")>Pending Approval</option>
+                <option value="Paid" @(Request.QueryString["Status"] == "Paid" ? "selected" : "")>Paid</option>
+                <option value="ChangeRequested" @(Request.QueryString["Status"] == "ChangeRequested" ? "selected" : "")>Change Requested</option>
+                <option value="Rejected" @(Request.QueryString["Status"] == "Rejected" ? "selected" : "")>Rejected</option>
+            </select>
+        </div>
+
+        <div class="col-md-2 align-self-end">
+            <button type="submit" class="btn btn-primary btn-block">Search</button>
+        </div>
+    </div>
+}
+
+<table class="table table-bordered mt-4">
+    <thead class="bg-primary">
+        <tr>
+            <th>Employee Name</th>
+            <th>Date Submitted</th>
+            <th>Total Amount</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count() > 0)
+        {
+            foreach (var form in Model)
+            {
+                <tr>
+                    <td>@form.User.Username</td>
+                    <td>@form.DateSubmitted.ToShortDateString()</td>
+                    <td>@form.TotalAmount</td>
+                    <td>@form.Status</td>
+
+                    <td>@Html.ActionLink("View Details", "ExpenseDetails", "Admin", new { id = form.Id }, new { @class = "btn btn-sm btn-warning" })</td>
+
+
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="4">No Forms Found</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="pagination-container">
+    @Html.PagedListPager(Model, page => Url.Action("ExpenseForms", new
+    {
+        page,
+        DateSubmitted = Request.QueryString["DateSubmitted"],
+    Status = Request.QueryString["Status"]
+    }), new PagedListRenderOptions()
+    {
+        DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+        DisplayLinkToLastPage = PagedListDisplayMode.Always,
+        DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+        DisplayLinkToNextPage = PagedListDisplayMode.Always,
+        Display = PagedListDisplayMode.IfNeeded,
+        ClassToApplyToFirstListItemInPager = "first-page",
+        ClassToApplyToLastListItemInPager = "last-page",
+        LinkToPreviousPageFormat = "Previous",
+        LinkToNextPageFormat = "Next",
+        LinkToFirstPageFormat = "First",
+        LinkToLastPageFormat = "Last",
+        UlElementClasses = new[] { "pagination" }
+
+    })
+</div>
+
+
+
+

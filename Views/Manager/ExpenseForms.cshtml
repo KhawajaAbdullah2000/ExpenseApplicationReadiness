@@ -1,0 +1,88 @@
+﻿@model IEnumerable<ExpenseApplication.Models.ExpenseForm>
+@using System.Web.Mvc
+
+<h2>Expense Forms of Employees</h2>
+
+<form id="filterForm" method="get" action="@Url.Action("ExpenseForms", "Manager", new { id = Session["UserId"] })" class="form-inline mb-4">
+
+    <div class="form-group row">
+        <div class="col-md-2">
+            <label class="form-label" for="DateSubmitted">Date From:</label>
+            <input type="date" name="dateFrom" id="dateFrom" class="form-control" value="@Request.QueryString["dateFrom"]" />
+        </div>
+
+        <div class="col-md-2">
+            <label class="form-label" for="DateSubmitted">Date To:</label>
+            <input type="date" name="dateTo" id="dateTo" class="form-control" value="@Request.QueryString["dateTo"]" />
+        </div>
+        <div class="col-md-2">
+            <label class="form-label" for="amountRange">Total Amount Range:</label>
+            <input class="form-range" type="range" id="amountRange" name="amountRange" min="0" max="500000" step="10"
+                   value="@(Request.QueryString["amountRange"] ?? "0")"
+                   oninput="updateRangeValue(this.value)" />
+            <span id="rangeValue">@(Request.QueryString["amountRange"] ?? "0")</span> <!-- Set the rangeValue span initially -->
+        </div>
+
+
+
+        <div class="col-md-2 align-self-end">
+            <button type="submit" class="btn btn-primary btn-block">Search</button>
+        </div>
+    </div>
+
+</form>
+
+
+
+<table class="table table-bordered mt-4">
+    <thead class="bg-primary">
+        <tr>
+            <th>Employee Name</th>
+            <th>Date Submitted</th>
+            <th>Total Amount</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count() > 0)
+        {
+            foreach (var form in Model)
+            {
+                <tr>
+                    <td>@form.User.Username</td>
+                    <td>@form.DateSubmitted.ToShortDateString()</td>
+                    <td>@form.TotalAmount</td>
+                    <td>@form.Status</td>
+                    @if (form.Status != ExpenseFormStatus.Approved && form.Status != ExpenseFormStatus.Paid)
+                    {
+                        <td>@Html.ActionLink("Details", "ChangeStatus", "Manager", new { id = form.Id }, new { @class = "btn btn-sm btn-warning" })</td>
+                    }
+                    else
+                    {
+                        <td><button class="btn btn-danger btn-sm">Action Completed</button></td>
+                    }
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="4">No Forms Found</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+   <script src="~/MyScripts/ManagerExpenseFormFilter.js"></script>
+    <script>
+    var selectedAmountRange = '@(Request.QueryString["amountRange"] ?? "0")';
+    var sweetAlertMessage = '@TempData["SweetAlertMessage"]';
+    var sweetAlertType = '@TempData["SweetAlertType"]';
+    </script>
+    
+}

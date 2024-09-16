@@ -1,0 +1,32 @@
+﻿@model ExpenseApplication.Models.User
+@{
+    ViewBag.Title = "AccoutantHome";
+}
+
+<div class="float-end">@Html.ActionLink("Expense Forms", "ExpenseForms", "Accountant", new { id = Session["UserId"] }, new { @class = "btn btn-primary" })</div>
+
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white fw-bold">
+                    <h4 class="text-center">User Details</h4>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Username: @Model.Username</h5>
+                    <p class="card-text">
+                        <strong>Email:</strong> @Model.Email<br />
+                    </p>
+
+                    <p class="card-text">
+                        <strong>Role:</strong> @Model.Role<br />
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+

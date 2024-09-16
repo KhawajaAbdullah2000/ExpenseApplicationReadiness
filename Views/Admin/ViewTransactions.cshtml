@@ -1,0 +1,54 @@
+﻿@model IEnumerable<ExpenseApplication.Models.ExpenseFormHistory>
+@{
+    ViewBag.Title = "ViewTransactions";
+}
+
+<h2>ViewTransactions</h2>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 col-md-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4>Expense Form History</h4>
+                </div>
+                <div class="card-body">
+                    @if (Model.Any())
+                    {
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Previous Status</th>
+                                    <th>New Status</th>
+                                    <th>Remarks</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var transaction in Model)
+                                {
+                                    <tr>
+                                        <td>@transaction.ChangeDate.ToString("dd/MM/yyyy")</td>
+                                        <td>@transaction.OldStatus</td>
+                                        <td>@transaction.NewStatus</td>
+                                        <td>@transaction.Remarks</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <div class="alert alert-warning" role="alert">
+                            No transactions available for this form.
+                        </div>
+                    }
+                </div>
+                <div class="card-footer text-center">
+                    <a href="@Url.Action("ExpenseForms", "Admin")" class="btn btn-primary">Back to Forms</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

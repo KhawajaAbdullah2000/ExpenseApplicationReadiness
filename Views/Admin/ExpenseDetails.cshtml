@@ -1,0 +1,59 @@
+﻿@model ExpenseApplication.Models.ViewModels.ExpenseFormDetailsViewModel
+@{
+    ViewBag.Title = "Expense Form Details for Admin";
+}
+
+<main>
+
+        <div class="card col-lg-6">
+            <div class="card-header bg-success text-white fw-bold">
+                Expense Form Details
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Form ID: @Model.ExpenseForm.Id</h5>
+                <p class="card-text"><strong>Date Submitted:</strong> @Model.ExpenseForm.DateSubmitted.ToShortDateString()</p>
+                <p class="card-text"><strong>Currency:</strong> @Model.ExpenseForm.Currency</p>
+                <p class="card-text"><strong>Status:</strong> @Model.ExpenseForm.Status</p>
+                <p class="card-text"><strong>Remarks:</strong> @Model.LatestRemark</p>
+                <p class="card-text"><strong>Total Amount:</strong> @Model.ExpenseForm.TotalAmount</p>
+            </div>
+        </div>
+   
+
+    <h3 class="mt-3">Expenses</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Expense Date</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.ExpenseForm.Expenses != null && Model.ExpenseForm.Expenses.Any())
+            {
+                foreach (var expense in Model.ExpenseForm.Expenses)
+                {
+                    <tr>
+                        <td>@expense.Description</td>
+                        <td>@expense.ExpenseDate.ToShortDateString()</td>
+                        <td>@expense.Amount</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="3">No expenses found.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+
+        @Html.ActionLink("View All Transactions of this Form", "ViewTransactions", "Admin", new { id = Model.ExpenseForm.Id }, new { @class = "btn btn-warning" })
+
+  
+</main>
+

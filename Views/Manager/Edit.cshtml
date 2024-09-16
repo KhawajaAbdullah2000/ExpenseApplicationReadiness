@@ -1,0 +1,82 @@
+﻿@model ExpenseApplication.Models.ViewModels.ChangeStatusViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="mt-4 d-flex justify-content-center" style="height: 100vh;">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header bg-primary">
+                <h3>Edit Status for Expense Form Submitted by @Model.ExpenseForm.User.Username</h3>
+            </div>
+
+            <div class="card-body">
+                @using (Html.BeginForm("Edit", "Manager", FormMethod.Post, new { id = "editForm" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.ExpenseForm.Id)
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ExpenseForm.Status)
+                            @Html.DropDownListFor(model => model.ExpenseForm.Status,
+                                Enum.GetValues(typeof(ExpenseFormStatus))
+                                .Cast<ExpenseFormStatus>()
+                                .Where(e => e != ExpenseFormStatus.Paid) // Exclude Paid status
+                                .Select(e => new SelectListItem
+                                {
+                                    Text = e.ToString(),
+                                    Value = e.ToString(),
+                                    Selected = e == Model.ExpenseForm.Status
+                                }),
+                                "Select Status",
+                                new { @class = "form-select" })
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <label class="form-label">Remarks</label>
+                            @Html.TextAreaFor(model => model.Remarks, new { @class = "form-control", rows = 2, cols = 30, id = "remarks" })
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Save" class="btn btn-success mt-4" />
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts{
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#editForm').submit(function (event) {
+                var remarks = $('#remarks').val().trim();
+
+                if (remarks === '') {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'No Remarks Found',
+                        text: 'Please enter your remarks.',
+                        confirmButtonText: 'OK'
+                    });
+                    event.preventDefault(); // Prevent form submission
+                }
+            });
+        });
+    </script>
+}

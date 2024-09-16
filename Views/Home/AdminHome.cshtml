@@ -1,0 +1,185 @@
+﻿@{
+    ViewBag.Title = "Expense Form Status Charts";
+}
+
+<h2>Welcome Admin</h2>
+
+<h1 class="text-center fw-bold">Reports</h1>
+
+<div class="container mt-5">
+    <div class="row">
+        <!-- First Pie Chart for Expense Form Status -->
+        <div class="col-md-6">
+            <div class="card">
+              
+                <div class="card-body">
+                    <div id="expenseFormStatusChart" style="height: 370px; width: 100%;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second Chart for EMployees Forms Chart -->
+        <div class="col-md-6">
+            <div class="card">
+               
+                <div class="card-body">
+                    <div id="employeeFormsChart" style="height: 370px; width: 100%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <div class="card">
+
+                <div class="card-body">
+                    <div id="managerEmployeesChart" style="height: 370px; width: 100%;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div id="dailyExpenseChart" style="height: 370px; width: 100%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5 justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div id="dailyExpenseChartByCurrency" style="height: 370px; width: 100%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+    <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+
+    <script>
+
+    var expenseFormStatusChart = new CanvasJS.Chart("expenseFormStatusChart", {
+        theme: "light",
+        exportEnabled: true,
+        animationEnabled: true,
+        title: {
+            text: "Expense Form Status Distribution"
+        },
+        data: [{
+            type: "pie",
+            startAngle: 180,
+            toolTipContent: "<b>{label}</b>: {y}",
+            showInLegend: "true",
+            legendText: "{label}",
+            indexLabel: "{label} - {y}",
+            dataPoints: @Html.Raw(ViewBag.DataPoints)
+        }]
+    });
+        expenseFormStatusChart.render();
+
+   var employeeFormChart = new CanvasJS.Chart("employeeFormsChart", {
+        theme: "light",
+        exportEnabled: true,
+        animationEnabled: true,
+        title: {
+            text: "Number of Forms Submitted by Employees"
+        },
+        data: [{
+            type: "column",
+            toolTipContent: "<b>{label}</b>: {y}",
+            dataPoints: @Html.Raw(ViewBag.EmployeeFormData)
+        }]
+    });
+        employeeFormChart.render();
+
+
+
+        var managerAndEmployeesChart = new CanvasJS.Chart("managerEmployeesChart", {
+      theme: "light",
+      exportEnabled: true,
+      animationEnabled: true,
+      title: {
+          text: "Number of Employees under Managers"
+      },
+      data: [{
+          type: "column",
+          toolTipContent: "<b>{label}</b>: {y}",
+          dataPoints: @Html.Raw(ViewBag.ManagerEmployeeData)
+      }]
+  });
+        managerAndEmployeesChart.render();
+
+
+
+        // Employee Forms Chart
+        var employeeFormChart = new CanvasJS.Chart("employeeFormsChart", {
+            theme: "light",
+            exportEnabled: true,
+            animationEnabled: true,
+            title: {
+                text: "Number of Forms Submitted by Employees"
+            },
+            data: [{
+                type: "column",
+                toolTipContent: "<b>{label}</b>: {y}",
+                dataPoints: @Html.Raw(ViewBag.EmployeeFormData)
+            }]
+        });
+        employeeFormChart.render();
+
+     var dailyExpenseChart = new CanvasJS.Chart("dailyExpenseChart", {
+            theme: "light",
+            exportEnabled: true,
+            animationEnabled: true,
+            title: {
+                text: "Total Expenses by Date"
+            },
+            axisX: {
+                title: "Date"
+            },
+            axisY: {
+                title: "Total Amount",
+                prefix: ""
+            },
+            data: [{
+                type: "line",
+                toolTipContent: "<b>{label}</b>: {y}",
+                dataPoints: @Html.Raw(ViewBag.DailyExpenseData)
+            }]
+        });
+        dailyExpenseChart.render();
+
+         var dailyExpenseChartByCurrency = new CanvasJS.Chart("dailyExpenseChartByCurrency", {
+        theme: "light",
+        exportEnabled: true,
+        animationEnabled: true,
+        title: {
+            text: "Total Expenses by Currency"
+        },
+        axisX: {
+            title: "Currency"
+        },
+        axisY: {
+            title: "Total Amount",
+            prefix: ""
+        },
+        data: [{
+            type: "line",
+            toolTipContent: "<b>{label}</b>: {y}",
+            dataPoints: @Html.Raw(ViewBag.dailyExpensesByCurrencyDataPoints)
+        }]
+    });
+        dailyExpenseChartByCurrency.render();
+
+    </script>
+
+}
+

@@ -1,0 +1,75 @@
+﻿@model IEnumerable<ExpenseApplication.Models.ExpenseForm>
+
+<h2>Expense to be Paid</h2>
+
+<form id="searchForm" method="get" action="@Url.Action("ExpenseForms", "Accountant", new { id = Session["UserId"] })" class="form-inline mb-4">
+    <div class="form-group row">
+        <div class="col-md-2">
+            <label for="DateSubmitted">Date Submitted:</label>
+            <input type="date" name="DateSubmitted" id="DateSubmitted" class="form-control" value="@Request.QueryString["DateSubmitted"]" />
+        </div>
+        <div class="col-md-3">
+            <label for="usernameSearch">Employee Name:</label>
+            <input type="text" name="usernameSearch" id="usernameSearch" class="form-control" value="@Request.QueryString["usernameSearch"]" placeholder="Search by employee name" />
+        </div>
+        <div class="col-md-2 align-self-end">
+            <button type="submit" class="btn btn-primary btn-block">Search</button>
+        </div>
+    </div>
+</form>
+
+<table class="table table-bordered">
+    <thead class="bg-primary">
+        <tr>
+            <th>Employee Name</th>
+            <th>Date Submitted</th>
+            <th>Total Amount</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count() > 0)
+        {
+            foreach (var form in Model)
+            {
+                <tr>
+                    <td>@form.User.Username</td>
+                    <td>@form.DateSubmitted.ToShortDateString()</td>
+                    <td>@form.TotalAmount</td>
+                    <td>@form.Status</td>
+
+                    <td>@Html.ActionLink("Details", "ChangeStatus", "Accountant", new { id = form.Id }, new { @class = "btn btn-sm btn-warning" })</td>
+                    
+                   
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="4">No Forms Found</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var message = '@TempData["SweetAlertMessage"]';
+            var type = '@TempData["SweetAlertType"]';
+
+            if (message && type) {
+                Swal.fire({
+                    icon: type,
+                    title: message,
+                    showConfirmButton: true
+                });
+            }
+        });
+    </script>
+}

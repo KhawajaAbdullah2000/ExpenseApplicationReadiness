@@ -1,0 +1,35 @@
+﻿@using System.Web.Mvc
+@model IEnumerable<ExpenseApplication.Models.User>
+@{
+    ViewBag.Title = "ManagerHome";
+}
+
+@*If Manager has enployees assign, then only show this button*@
+@if (Model.Count() > 0)
+{
+    <div class="float-end">@Html.ActionLink("Expense Forms", "ExpenseForms", "Manager", new { id = Session["UserId"] }, new { @class = "btn btn-primary" })</div>
+
+}
+
+
+
+<h2>Employees Managed by You</h2>
+
+<table class="table table-bordered mt-4">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var employee in Model)
+        {
+            <tr>
+                <td>@employee.Username</td>
+                <td>@employee.Email</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,72 @@
+﻿@model ExpenseApplication.Models.ViewModels.ExpenseFormViewModel
+
+@using (Html.BeginForm("Edit", "Employee", FormMethod.Post, new { id = "expenseForm" }))
+{
+   
+    <h2>Edit Expense Form</h2>
+    <div id="expenseData" data-expense-index="@Model.Expenses.Count"></div>
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.UserId)
+        @Html.HiddenFor(m => m.TotalAmount)
+
+
+        @Html.LabelFor(m => m.Currency, "Currency")
+        @Html.DropDownListFor(m => m.Currency, Model.CurrencyList, "Select a currency--", new { @class = "form-select" })
+        @Html.ValidationMessageFor(m => m.Currency)
+    </div>
+
+    <h3>Expenses</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Expense Date</th>
+                <th>Amount</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="expensesTable">
+            @for (int i = 0; i < Model.Expenses.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @Html.TextBoxFor(m => m.Expenses[i].Description, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Expenses[i].Description, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.Expenses[i].ExpenseDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                        @Html.ValidationMessageFor(m => m.Expenses[i].ExpenseDate, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.Expenses[i].Amount, new { @class = "form-control amountInput" })
+                        @Html.ValidationMessageFor(m => m.Expenses[i].Amount, "", new { @class = "text-danger" })
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger removeExpense">Remove</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <button type="button" id="addExpense" class="btn btn-primary">Add Expense</button>
+
+    <div>
+        <strong>Total Amount:</strong> <span id="totalAmount">@Model.TotalAmount</span>
+    </div>
+
+    <div>
+        <button type="submit" class="btn btn-success">Save Changes</button>
+    </div>
+}
+
+@section Scripts {
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    <script src="~/MyScripts/ExpenseForm.js"></script>
+}

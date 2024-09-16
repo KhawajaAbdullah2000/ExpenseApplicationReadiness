@@ -1,0 +1,73 @@
+﻿@using System.Web.Mvc
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title </title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark text-white">
+        <div class="container">
+            <a class="navbar-brand" href="@Url.Action("Index", "Home")">Expense App</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto ">
+                    <!-- Added ms-auto class here -->
+                    @if (Session["UserID"] != null)
+                    {
+                        <li class="nav-item">
+                            @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link text-white" })
+                        </li>
+
+                        <li class="nav-item">
+                            <span class="nav-link text-white">Welcome @Session["UserName"] !</span>
+                        </li>
+                        <li class="nav-item">
+                            <span class="nav-link">
+                                <span class="badge bg-success">@Session["Role"]</span>
+                            </span>
+                        </li>
+                    }
+                    @if (Session["Role"] != null && Session["Role"].ToString() == "Admin")
+                    {
+                        <li class="nav-item">
+                            @Html.ActionLink("All Expense Forms", "ExpenseForms", "Admin", new { area = "" }, new { @class = "fw-bold text-white btn btn-info" })
+                        </li>
+                    }
+                    @if (Session["Role"] != null && Session["Role"].ToString() == "Employee")
+                    {
+                        <li class="nav-item">
+                            @Html.ActionLink("Add Expense", "AddExpense", "Employee", new { area = "" }, new { @class = "fw-bold text-white btn btn-info" })
+                        </li>
+                    }
+                    @if (Session["UserID"] != null)
+                    {
+                        <li class="nav-item">
+                            @Html.ActionLink("Logout", "Logout", "Login", new { area = "" }, new { @class = "nav-link text-white" })
+
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container body-content">
+        @RenderBody()
+
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

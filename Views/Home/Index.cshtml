@@ -1,0 +1,92 @@
+﻿@model IEnumerable<ExpenseApplication.Models.ExpenseForm>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@*Employee Home Page*@
+
+<main>
+    <h1>Your Expense Forms</h1>
+</main>
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Get))
+{
+    <div class="form-group row">
+        <div class="col-md-2">
+            <label for="DateSubmitted">Date Submitted:</label>
+            <input type="date" name="DateSubmitted" id="DateSubmitted" class="form-control" value="@Request.QueryString["DateSubmitted"]" />
+        </div>
+        <div class="col-md-2">
+            <label for="Status">Status:</label>
+            <select name="Status" id="Status" class="form-control">
+                <option value="">-- Select Status --</option>
+                <option value="Approved" @(Request.QueryString["Status"] == "Approved" ? "selected" : "")>Approved</option>
+                <option value="PendingApproval" @(Request.QueryString["Status"] == "PendingApproval" ? "selected" : "")>Pending Approval</option>
+                <option value="Paid" @(Request.QueryString["Status"] == "Paid" ? "selected" : "")>Paid</option>
+                <option value="ChangeRequested" @(Request.QueryString["Status"] == "ChangeRequested" ? "selected" : "")>Change Requested</option>
+                <option value="Rejected" @(Request.QueryString["Status"] == "Rejected" ? "selected" : "")>Rejected</option>
+            </select>
+        </div>
+  
+        <div class="col-md-2 align-self-end">
+            <button type="submit" class="btn btn-primary btn-block">Search</button>
+        </div>
+    </div>
+}
+
+<table class="table table-bordered table-responsive mt-4">
+    <thead>
+        <tr>
+            <th>Form ID</th>
+            <th>Date Submitted</th>
+            <th>Currency</th>
+            <th>Status</th>
+            <th>Total Amount</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var form in Model)
+            {
+                <tr>
+                    <td>@form.Id</td>
+
+                    <td>@form.DateSubmitted.ToShortDateString()</td>
+                    <td>@form.Currency</td>
+                    <td>@form.Status</td>
+                    <td>@form.TotalAmount</td>
+                    <td>
+                        @Html.ActionLink("View Details", "ExpenseDetails", "Employee", new { id = form.Id }, new {@class="btn btn-warning btn-sm"})
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="7">No expense forms found.</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var message = '@TempData["SweetAlertMessage"]';
+            var type = '@TempData["SweetAlertType"]';
+
+            if (message && type) {
+                Swal.fire({
+                    icon: type,
+                    title: message,
+                    showConfirmButton: true
+                });
+            }
+        });
+    </script>
+}
