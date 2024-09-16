@@ -10,6 +10,7 @@ namespace ExpenseApplication.Interfaces
 {
     public interface IEmployee
     {
+        User FetchUser(LoginViewModel user);
         void AddExpense(ExpenseForm form);
 
         void AddExpenseFormHistory(ExpenseFormHistory history);
@@ -18,6 +19,7 @@ namespace ExpenseApplication.Interfaces
         void RemoveExpenses(IEnumerable<Expense> expenses);
 
         IQueryable<ExpenseForm> GetExpenseFormsByUserId(int userId);
+
 
      
         void SaveChanges();

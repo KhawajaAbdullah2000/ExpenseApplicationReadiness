@@ -1,4 +1,7 @@
-﻿using ExpenseApplication.Models;
+﻿using ExpenseApplication.Interfaces;
+using ExpenseApplication.Models;
+using ExpenseApplication.Repositories;
+using ExpenseApplication.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -10,8 +13,12 @@ namespace ExpenseApplication.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly ExpenseDbContext context = new ExpenseDbContext();
-        // GET: Login
+        //private readonly ExpenseDbContext context = new ExpenseDbContext();
+        private IEmployee empRepository;
+        public LoginController()
+        {
+            this.empRepository = new EmployeeRepository(new ExpenseDbContext());
+        }
         public ActionResult Index()
         {
             if (Session["UserId"] != null)
@@ -27,26 +34,25 @@ namespace ExpenseApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = context.Users
-                                      .Where(u => u.Email == user.Email && u.Password == user.Password)
-                                      .FirstOrDefault();
+                
+                    var result = empRepository.FetchUser(user);
 
-                if (result != null)
-                {
-                    Session["UserId"] = result.Id.ToString();
-                    Session["UserName"] = result.Username.ToString();
-                    Session["Role"] = result.Role.ToString();
+                    if (result != null)
+                    {
+                        // User is found, handle login success and sessions
+                        Session["UserId"] = result.Id.ToString();
+                        Session["UserName"] = result.Username.ToString();
+                        Session["Role"] = result.Role.ToString();
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Invalid Credentials");
+                        return View();
+                    }
 
-                    // User is found, handle login success
-                    return RedirectToAction("Index", "Home");
                 }
-                else
-                {
-                    ModelState.AddModelError("", "Invalid Credentials");
-                    return View();
-                }
-
-            }
+               
             else
             {
                 return View();
@@ -59,6 +65,10 @@ namespace ExpenseApplication.Controllers
             Session.Abandon();
             return RedirectToAction("Index", "Login");
         }
+
+        
+
+
 
 
     }

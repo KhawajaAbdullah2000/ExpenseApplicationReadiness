@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.Entity;
+using System.Web.Helpers;
 
 namespace ExpenseApplication.Repositories
 {
@@ -12,6 +13,18 @@ namespace ExpenseApplication.Repositories
     {
         private ExpenseDbContext context;
 
+        public User FetchUser(LoginViewModel user)
+        {
+            var userRecord = context.Users
+                              .Where(u => u.Email == user.Email)
+                              .FirstOrDefault();
+            if (userRecord != null && Crypto.VerifyHashedPassword(userRecord.Password, user.Password))
+            {
+                return userRecord;
+            }
+
+            return null;
+        }
         public EmployeeRepository(ExpenseDbContext dataContext)
         {
             this.context = dataContext;
