@@ -36,7 +36,7 @@
                 {
                     <tr>
                         <td>@expense.Description</td>
-                        <td>@expense.ExpenseDate.ToShortDateString()</td>
+                        <td>@expense.ExpenseDate.ToString("dd-MMM-yyyy")</td>
                         <td>@expense.Amount</td>
                     </tr>
                 }
@@ -60,3 +60,12 @@
 
     @*<a href="@Url.Action("Index", "Home")" class="btn btn-primary">Back to List</a>*@
 </main>
+
+
+@section Scripts{
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+
+    <script src="~/MyScripts/AccountantValidation.js"></script>
+}
+

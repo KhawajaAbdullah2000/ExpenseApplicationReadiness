@@ -1,6 +1,4 @@
-﻿
-
-var expenseIndex = $('#expensesTable tr').length;  // Initialize expenseIndex to the number of existing rows
+﻿var expenseIndex = $('#expensesTable tr').length;  // Initialize expenseIndex to the number of existing rows
 
 // Add new expense row
 $('#addExpense').click(function () {
@@ -29,14 +27,13 @@ function reindexExpenses() {
         $(this).find('input').each(function () {
             let field = $(this).attr('name');
             if (field) {
-                // Update the name attribute to reflect the current index
                 var newName = field.replace(/Expenses\[\d+\]/, `Expenses[${index}]`);
                 $(this).attr('name', newName);
             }
         });
     });
 
-    // Update the expenseIndex to reflect the current number of rows
+    // Update the expenseIndex to match the current number of rows
     expenseIndex = $('#expensesTable tr').length;
 }
 
@@ -47,15 +44,14 @@ function calculateTotal() {
         var amount = parseFloat($(this).val()) || 0;
         total += amount;
     });
-    $('#totalAmount').text(total.toFixed(2));  // Update total amount display
+    $('#totalAmount').text(total.toFixed(2)); //display upto 2 decimal places
 }
 
-// Update total amount on input change
+
 $(document).on('input', '.amountInput', function () {
     calculateTotal();
 });
 
-// Recalculate total on page load
 $(document).ready(function () {
     calculateTotal();
 });
@@ -70,6 +66,6 @@ $('#expenseForm').click(function (e) {
             text: 'At least one expense must be added.',
             confirmButtonText: 'OK'
         });
-        e.preventDefault();  // Prevent form submission if no expenses
+        e.preventDefault(); 
     }
 });

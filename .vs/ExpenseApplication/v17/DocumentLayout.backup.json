@@ -1,12 +1,71 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\muhammad.abdullah\\source\\repos\\ExpenseApplication\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E9493B49-03FD-4AAB-938E-C931B83F5FE5}|ExpenseApplication.csproj|c:\\users\\muhammad.abdullah\\source\\repos\\expenseapplication\\views\\admin\\viewtransactions.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E9493B49-03FD-4AAB-938E-C931B83F5FE5}|ExpenseApplication.csproj|solutionrelative:views\\admin\\viewtransactions.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E9493B49-03FD-4AAB-938E-C931B83F5FE5}|ExpenseApplication.csproj|c:\\users\\muhammad.abdullah\\source\\repos\\expenseapplication\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E9493B49-03FD-4AAB-938E-C931B83F5FE5}|ExpenseApplication.csproj|solutionrelative:controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E9493B49-03FD-4AAB-938E-C931B83F5FE5}|ExpenseApplication.csproj|c:\\users\\muhammad.abdullah\\source\\repos\\expenseapplication\\repositories\\adminrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E9493B49-03FD-4AAB-938E-C931B83F5FE5}|ExpenseApplication.csproj|solutionrelative:repositories\\adminrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ViewTransactions.cshtml",
+              "DocumentMoniker": "C:\\Users\\muhammad.abdullah\\source\\repos\\ExpenseApplication\\Views\\Admin\\ViewTransactions.cshtml",
+              "RelativeDocumentMoniker": "Views\\Admin\\ViewTransactions.cshtml",
+              "ToolTip": "C:\\Users\\muhammad.abdullah\\source\\repos\\ExpenseApplication\\Views\\Admin\\ViewTransactions.cshtml",
+              "RelativeToolTip": "Views\\Admin\\ViewTransactions.cshtml",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAACQAAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-09-19T09:20:55.239Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AdminRepository.cs",
+              "DocumentMoniker": "C:\\Users\\muhammad.abdullah\\source\\repos\\ExpenseApplication\\Repositories\\AdminRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\AdminRepository.cs",
+              "ToolTip": "C:\\Users\\muhammad.abdullah\\source\\repos\\ExpenseApplication\\Repositories\\AdminRepository.cs",
+              "RelativeToolTip": "Repositories\\AdminRepository.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAzwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T09:20:30.162Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "C:\\Users\\muhammad.abdullah\\source\\repos\\ExpenseApplication\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AdminController.cs",
+              "ToolTip": "C:\\Users\\muhammad.abdullah\\source\\repos\\ExpenseApplication\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "Controllers\\AdminController.cs",
+              "ViewState": "AgIAAFYAAAAAAAAAAAAgwGgAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T09:20:18.296Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

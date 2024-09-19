@@ -83,12 +83,7 @@ C:\Users\muhammad.abdullah\source\repos\ExpenseApplication\bin\Newtonsoft.Json.x
 C:\Users\muhammad.abdullah\source\repos\ExpenseApplication\bin\Antlr3.Runtime.pdb
 C:\Users\muhammad.abdullah\source\repos\ExpenseApplication\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\muhammad.abdullah\source\repos\ExpenseApplication\obj\Debug\ExpenseApplication.csproj.AssemblyReference.cache
-C:\Users\muhammad.abdullah\source\repos\ExpenseApplication\obj\Debug\ExpenseApplication.Migrations.Initial.resources
-C:\Users\muhammad.abdullah\source\repos\ExpenseApplication\obj\Debug\ExpenseApplication.Migrations.RemovedEMployeeAdminAccountant.resources
-C:\Users\muhammad.abdullah\source\repos\ExpenseApplication\obj\Debug\ExpenseApplication.Migrations.UpdatedExpenseForm.resources
-C:\Users\muhammad.abdullah\source\repos\ExpenseApplication\obj\Debug\ExpenseApplication.Migrations.RemovedExpenseForm.resources
-C:\Users\muhammad.abdullah\source\repos\ExpenseApplication\obj\Debug\ExpenseApplication.Migrations.AddedExpenseFormAgainForManagers.resources
-C:\Users\muhammad.abdullah\source\repos\ExpenseApplication\obj\Debug\ExpenseApplication.Migrations.RemovedStatusFromExpense.resources
+C:\Users\muhammad.abdullah\source\repos\ExpenseApplication\obj\Debug\ExpenseApplication.Migrations.InitialMigration.resources
 C:\Users\muhammad.abdullah\source\repos\ExpenseApplication\obj\Debug\ExpenseApplication.csproj.GenerateResource.cache
 C:\Users\muhammad.abdullah\source\repos\ExpenseApplication\obj\Debug\ExpenseApplication.csproj.CoreCompileInputs.cache
 C:\Users\muhammad.abdullah\source\repos\ExpenseApplication\obj\Debug\ExpenseA.2C298FE7.Up2Date

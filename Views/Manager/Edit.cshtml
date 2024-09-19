@@ -62,21 +62,5 @@
 @section Scripts{
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#editForm').submit(function (event) {
-                var remarks = $('#remarks').val().trim();
-
-                if (remarks === '') {
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'No Remarks Found',
-                        text: 'Please enter your remarks.',
-                        confirmButtonText: 'OK'
-                    });
-                    event.preventDefault(); // Prevent form submission
-                }
-            });
-        });
-    </script>
+    <script src="~/MyScripts/ManagerValidation.js"></script>
 }

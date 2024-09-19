@@ -7,9 +7,11 @@
     ViewBag.Title = "Expense Forms for Admin";
 }
 
+<h2 class="fw-bold">Expense Forms</h2>
+
 @using (Html.BeginForm("ExpenseForms", "Admin", FormMethod.Get))
 {
-    <div class="form-group row">
+    <div class="form-group row mt-4">
         <div class="col-md-2">
             <label for="DateSubmitted">Date Submitted:</label>
             <input type="date" name="DateSubmitted" id="DateSubmitted" class="form-control" value="@Request.QueryString["DateSubmitted"]" />
@@ -21,7 +23,6 @@
                 <option value="Approved" @(Request.QueryString["Status"] == "Approved" ? "selected" : "")>Approved</option>
                 <option value="PendingApproval" @(Request.QueryString["Status"] == "PendingApproval" ? "selected" : "")>Pending Approval</option>
                 <option value="Paid" @(Request.QueryString["Status"] == "Paid" ? "selected" : "")>Paid</option>
-                <option value="ChangeRequested" @(Request.QueryString["Status"] == "ChangeRequested" ? "selected" : "")>Change Requested</option>
                 <option value="Rejected" @(Request.QueryString["Status"] == "Rejected" ? "selected" : "")>Rejected</option>
             </select>
         </div>
@@ -34,7 +35,7 @@
 
 <table class="table table-bordered mt-4">
     <thead class="bg-primary">
-        <tr>
+        <tr class="text-center">
             <th>Employee Name</th>
             <th>Date Submitted</th>
             <th>Total Amount</th>
@@ -47,11 +48,32 @@
         {
             foreach (var form in Model)
             {
-                <tr>
+                <tr class="text-center">
                     <td>@form.User.Username</td>
-                    <td>@form.DateSubmitted.ToShortDateString()</td>
+                    <td>@form.DateSubmitted.ToString("dd-MMM-yyyy")</td>
                     <td>@form.TotalAmount</td>
-                    <td>@form.Status</td>
+                    <td>
+                        <p class="fs-6">
+                            @switch (form.Status)
+                            {
+                                case ExpenseFormStatus.Approved:
+                                    <span class="badge text-bg-success">Approved</span>
+                                    break;
+                                case ExpenseFormStatus.PendingApproval:
+                                    <span class="badge text-bg-dark">Pending Approval</span>
+                                    break;
+                                case ExpenseFormStatus.Paid:
+                                    <span class="badge text-bg-primary">Paid</span>
+                                    break;
+                                case ExpenseFormStatus.Rejected:
+                                    <span class="badge text-bg-danger">Rejected</span>
+                                    break;
+                                default:
+                                    <span class="badge badge-secondary">@form.Status</span>
+                                    break;
+                            }
+                        </p>
+                    </td>
 
                     <td>@Html.ActionLink("View Details", "ExpenseDetails", "Admin", new { id = form.Id }, new { @class = "btn btn-sm btn-warning" })</td>
 

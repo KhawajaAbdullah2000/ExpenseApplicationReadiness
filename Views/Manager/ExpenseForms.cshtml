@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<ExpenseApplication.Models.ExpenseForm>
 @using System.Web.Mvc
 
-<h2>Expense Forms of Employees</h2>
+<h2 class="fw-bold">Expense Awaiting Approval</h2>
 
 <form id="filterForm" method="get" action="@Url.Action("ExpenseForms", "Manager", new { id = Session["UserId"] })" class="form-inline mb-4">
 
-    <div class="form-group row">
+    <div class="form-group row mt-4">
         <div class="col-md-2">
             <label class="form-label" for="DateSubmitted">Date From:</label>
             <input type="date" name="dateFrom" id="dateFrom" class="form-control" value="@Request.QueryString["dateFrom"]" />
@@ -36,7 +36,7 @@
 
 <table class="table table-bordered mt-4">
     <thead class="bg-primary">
-        <tr>
+        <tr class="text-center">
             <th>Employee Name</th>
             <th>Date Submitted</th>
             <th>Total Amount</th>
@@ -49,11 +49,32 @@
         {
             foreach (var form in Model)
             {
-                <tr>
+                <tr class="text-center">
                     <td>@form.User.Username</td>
-                    <td>@form.DateSubmitted.ToShortDateString()</td>
+                    <td>@form.DateSubmitted.ToString("dd-MMM-yyyy")</td>
                     <td>@form.TotalAmount</td>
-                    <td>@form.Status</td>
+                    <td>
+                        <p class="fs-6">
+                            @switch (form.Status)
+                            {
+                                case ExpenseFormStatus.Approved:
+                                    <span class="badge text-bg-success">Approved</span>
+                                    break;
+                                case ExpenseFormStatus.PendingApproval:
+                                    <span class="badge text-bg-dark">Pending Approval</span>
+                                    break;
+                                case ExpenseFormStatus.Paid:
+                                    <span class="badge text-bg-primary">Paid</span>
+                                    break;
+                                case ExpenseFormStatus.Rejected:
+                                    <span class="badge text-bg-danger">Rejected</span>
+                                    break;
+                                default:
+                                    <span class="badge badge-secondary">@form.Status</span>
+                                    break;
+                            }
+                        </p>
+                    </td>
                     @if (form.Status != ExpenseFormStatus.Approved && form.Status != ExpenseFormStatus.Paid)
                     {
                         <td>@Html.ActionLink("Details", "ChangeStatus", "Manager", new { id = form.Id }, new { @class = "btn btn-sm btn-warning" })</td>

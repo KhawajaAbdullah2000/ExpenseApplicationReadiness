@@ -7,13 +7,13 @@ namespace ExpenseApplication.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class RemovedStatusFromExpense : IMigrationMetadata
+    public sealed partial class InitialMigration : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(RemovedStatusFromExpense));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialMigration));
         
         string IMigrationMetadata.Id
         {
-            get { return "202409061016162_RemovedStatusFromExpense"; }
+            get { return "202409180404037_InitialMigration"; }
         }
         
         string IMigrationMetadata.Source
