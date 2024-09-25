@@ -74,7 +74,7 @@ namespace ExpenseApplication.Repositories
 
         public IEnumerable<DatewiseExpense> GetDatewiseExpenseTotals()
         {
-            return context.ExpenseForms
+            return context.ExpenseForms.Where(e=>e.Status==ExpenseFormStatus.Paid)
              .GroupBy(e => DbFunctions.TruncateTime(e.DateSubmitted)) // Extract the date part only
              .Select(g => new DatewiseExpense
              {
@@ -87,7 +87,7 @@ namespace ExpenseApplication.Repositories
 
         public IEnumerable<CurrencyExpenseSummary> GetCurrencyExpenseSummaries()
         {
-            return context.ExpenseForms
+            return context.ExpenseForms.Where(e => e.Status == ExpenseFormStatus.Paid)
                           .GroupBy(e => e.Currency)
                           .Select(g => new CurrencyExpenseSummary
                           {

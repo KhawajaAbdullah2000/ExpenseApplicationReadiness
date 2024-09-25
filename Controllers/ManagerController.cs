@@ -47,7 +47,6 @@ namespace ExpenseApplication.Controllers
 
                 var employeeExpenseForms = manRepository.GetExpenseForms(manager);
 
-                // Filter by date if provided
                 if (!string.IsNullOrEmpty(dateFrom))
                 {
                     DateTime DateFrom;
@@ -68,8 +67,6 @@ namespace ExpenseApplication.Controllers
                     }
                 }
 
-
-                // Filter by total amount range if provided
                 if (!string.IsNullOrEmpty(amountRange))
                 {
                     if (int.TryParse(amountRange, out int AmountRange))

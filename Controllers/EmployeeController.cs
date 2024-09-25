@@ -133,7 +133,12 @@ namespace ExpenseApplication.Controllers
                 var form = empRepository.GetExpenseFormById(id);
                 if (form == null)
                 {
-                    return HttpNotFound();
+                    return RedirectToAction("Index", "Home");
+                }
+
+                if (form.Status == ExpenseFormStatus.Approved || form.Status == ExpenseFormStatus.Paid)
+                {
+                    return RedirectToAction("Index", "Home");
                 }
 
                 var viewModel = new ExpenseFormViewModel
