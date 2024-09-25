@@ -15,7 +15,6 @@ namespace ExpenseApplication.Models
         [Range(0, 5000, ErrorMessage = "Expense amount cannot exceed 5000.")]
         public decimal Amount { get; set; }
 
-        public ExpenseFormStatus Status { get; set; }  
 
       
     }

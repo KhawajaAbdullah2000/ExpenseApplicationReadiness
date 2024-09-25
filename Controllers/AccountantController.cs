@@ -86,8 +86,6 @@ namespace ExpenseApplication.Controllers
 
         }
 
-
-
         public ActionResult Edit(int id)
         {
             try
@@ -140,7 +138,7 @@ namespace ExpenseApplication.Controllers
                             OldStatus = FormHistory.NewStatus,
                             NewStatus = model.ExpenseForm.Status,
                             Remarks = "Paid by Accountant",
-                            ActionBy = Session["UserId"].ToString()
+                            ActionBy = Session["UserName"].ToString()
                         };
                         accRepository.AddExpenseFormHistory(history);
                         accRepository.SaveChanges();

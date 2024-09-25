@@ -156,29 +156,9 @@
     <Compile Include="Interfaces\IAdmin.cs" />
     <Compile Include="Interfaces\IEmployee.cs" />
     <Compile Include="Interfaces\IManager.cs" />
-    <Compile Include="Migrations\202409051259529_Initial.cs" />
-    <Compile Include="Migrations\202409051259529_Initial.Designer.cs">
-      <DependentUpon>202409051259529_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202409051310183_RemovedEMployeeAdminAccountant.cs" />
-    <Compile Include="Migrations\202409051310183_RemovedEMployeeAdminAccountant.Designer.cs">
-      <DependentUpon>202409051310183_RemovedEMployeeAdminAccountant.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202409051325382_UpdatedExpenseForm.cs" />
-    <Compile Include="Migrations\202409051325382_UpdatedExpenseForm.Designer.cs">
-      <DependentUpon>202409051325382_UpdatedExpenseForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202409051329267_RemovedExpenseForm.cs" />
-    <Compile Include="Migrations\202409051329267_RemovedExpenseForm.Designer.cs">
-      <DependentUpon>202409051329267_RemovedExpenseForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202409051602591_AddedExpenseFormAgainForManagers.cs" />
-    <Compile Include="Migrations\202409051602591_AddedExpenseFormAgainForManagers.Designer.cs">
-      <DependentUpon>202409051602591_AddedExpenseFormAgainForManagers.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202409061016162_RemovedStatusFromExpense.cs" />
-    <Compile Include="Migrations\202409061016162_RemovedStatusFromExpense.Designer.cs">
-      <DependentUpon>202409061016162_RemovedStatusFromExpense.cs</DependentUpon>
+    <Compile Include="Migrations\202409180404037_InitialMigration.cs" />
+    <Compile Include="Migrations\202409180404037_InitialMigration.Designer.cs">
+      <DependentUpon>202409180404037_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ChartModels\CurrencyExpenseSummary.cs" />
@@ -236,6 +216,7 @@
     <Content Include="MyScripts\AccountantValidation.js" />
     <Content Include="MyScripts\ExpenseForm.js" />
     <Content Include="MyScripts\ManagerExpenseFormFilter.js" />
+    <Content Include="MyScripts\ManagerValidation.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -316,23 +297,8 @@
     <Content Include="Scripts\jquery-3.7.0.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202409051259529_Initial.resx">
-      <DependentUpon>202409051259529_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202409051310183_RemovedEMployeeAdminAccountant.resx">
-      <DependentUpon>202409051310183_RemovedEMployeeAdminAccountant.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202409051325382_UpdatedExpenseForm.resx">
-      <DependentUpon>202409051325382_UpdatedExpenseForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202409051329267_RemovedExpenseForm.resx">
-      <DependentUpon>202409051329267_RemovedExpenseForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202409051602591_AddedExpenseFormAgainForManagers.resx">
-      <DependentUpon>202409051602591_AddedExpenseFormAgainForManagers.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202409061016162_RemovedStatusFromExpense.resx">
-      <DependentUpon>202409061016162_RemovedStatusFromExpense.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202409180404037_InitialMigration.resx">
+      <DependentUpon>202409180404037_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

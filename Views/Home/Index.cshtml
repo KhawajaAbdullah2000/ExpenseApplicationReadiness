@@ -24,7 +24,6 @@
                 <option value="Approved" @(Request.QueryString["Status"] == "Approved" ? "selected" : "")>Approved</option>
                 <option value="PendingApproval" @(Request.QueryString["Status"] == "PendingApproval" ? "selected" : "")>Pending Approval</option>
                 <option value="Paid" @(Request.QueryString["Status"] == "Paid" ? "selected" : "")>Paid</option>
-                <option value="ChangeRequested" @(Request.QueryString["Status"] == "ChangeRequested" ? "selected" : "")>Change Requested</option>
                 <option value="Rejected" @(Request.QueryString["Status"] == "Rejected" ? "selected" : "")>Rejected</option>
             </select>
         </div>
@@ -37,8 +36,7 @@
 
 <table class="table table-bordered table-responsive mt-4">
     <thead>
-        <tr>
-            <th>Form ID</th>
+        <tr class="text-center">
             <th>Date Submitted</th>
             <th>Currency</th>
             <th>Status</th>
@@ -51,12 +49,31 @@
         {
             foreach (var form in Model)
             {
-                <tr>
-                    <td>@form.Id</td>
-
-                    <td>@form.DateSubmitted.ToShortDateString()</td>
+                <tr class="text-center">
+                    <td>@form.DateSubmitted.ToString("dd-MMM-yyyy")</td>
                     <td>@form.Currency</td>
-                    <td>@form.Status</td>
+                    <td>
+                        <p class="fs-6">
+                            @switch (form.Status)
+                            {
+                                case ExpenseFormStatus.Approved:
+                                    <span class="badge text-bg-success">Approved</span>
+                                    break;
+                                case ExpenseFormStatus.PendingApproval:
+                                    <span class="badge text-bg-dark">Pending Approval</span>
+                                    break;
+                                case ExpenseFormStatus.Paid:
+                                    <span class="badge text-bg-primary">Paid</span>
+                                    break;
+                                case ExpenseFormStatus.Rejected:
+                                    <span class="badge text-bg-danger">Rejected</span>
+                                    break;
+                                default:
+                                    <span class="badge badge-secondary">@form.Status</span>
+                                    break;
+                            }
+                        </p>
+                    </td>
                     <td>@form.TotalAmount</td>
                     <td>
                         @Html.ActionLink("View Details", "ExpenseDetails", "Employee", new { id = form.Id }, new {@class="btn btn-warning btn-sm"})

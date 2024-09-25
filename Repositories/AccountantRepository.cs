@@ -21,6 +21,7 @@ namespace ExpenseApplication.Repositories
         {
             return context.ExpenseForms
                .Where(e => e.Status == ExpenseFormStatus.Approved)
+               .OrderByDescending(e => e.Id)
                .AsQueryable();
         }
 

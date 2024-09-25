@@ -31,6 +31,7 @@ namespace ExpenseApplication.Repositories
             return manager.Employees
                .SelectMany(e => e.ExpenseForms)
                .Where(f => f.Status != ExpenseFormStatus.Paid && f.Status != ExpenseFormStatus.Approved)
+               .OrderByDescending(f=>f.Id)
                .AsQueryable();
         }
 

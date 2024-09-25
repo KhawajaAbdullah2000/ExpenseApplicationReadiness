@@ -20,9 +20,10 @@
 
 <table class="table table-bordered">
     <thead class="bg-primary">
-        <tr>
+        <tr class="text-center">
             <th>Employee Name</th>
             <th>Date Submitted</th>
+            <th>Currency</th>
             <th>Total Amount</th>
             <th>Status</th>
             <th>Actions</th>
@@ -33,15 +34,18 @@
         {
             foreach (var form in Model)
             {
-                <tr>
+                <tr class="text-center">
                     <td>@form.User.Username</td>
-                    <td>@form.DateSubmitted.ToShortDateString()</td>
-                    <td>@form.TotalAmount</td>
-                    <td>@form.Status</td>
+                    <td>@form.DateSubmitted.ToString("dd-MMM-yyyy")</td>
+                    <td>@form.Currency</td>
+                    <td>@form.TotalAmount</td> 
+                    <td class="fs-6">
+                        <span class="badge text-bg-success">@form.Status</span>
+                    </td>
 
                     <td>@Html.ActionLink("Details", "ChangeStatus", "Accountant", new { id = form.Id }, new { @class = "btn btn-sm btn-warning" })</td>
-                    
-                   
+
+
                 </tr>
             }
         }

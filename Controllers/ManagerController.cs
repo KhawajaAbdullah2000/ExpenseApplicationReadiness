@@ -28,7 +28,8 @@ namespace ExpenseApplication.Controllers
         {
             Log.Info("Amount " + amountRange);
             var userId = Convert.ToInt32(Session["UserId"]);
-            //check if loggedin user is same as for whom the expense forms are to be found
+
+            //check if loggedin user(manager) is same as for whom the expense forms are to be found
             if (userId != id)
             {
                 return RedirectToAction("Index","Home");   
@@ -46,7 +47,6 @@ namespace ExpenseApplication.Controllers
 
                 var employeeExpenseForms = manRepository.GetExpenseForms(manager);
 
-                // Filter by date if provided
                 if (!string.IsNullOrEmpty(dateFrom))
                 {
                     DateTime DateFrom;
@@ -67,8 +67,6 @@ namespace ExpenseApplication.Controllers
                     }
                 }
 
-
-                // Filter by total amount range if provided
                 if (!string.IsNullOrEmpty(amountRange))
                 {
                     if (int.TryParse(amountRange, out int AmountRange))
@@ -158,7 +156,7 @@ namespace ExpenseApplication.Controllers
             {
                 try
                 {
-                Log.Info(model.Remarks);
+                Log.Info("Remarks: "+model.Remarks);
 
                 var form = manRepository.GetExpenseForm(model.ExpenseForm.Id);
                 if (form != null)
@@ -174,12 +172,12 @@ namespace ExpenseApplication.Controllers
                         OldStatus = FormHistory.NewStatus,
                         NewStatus = model.ExpenseForm.Status,
                         Remarks = model.Remarks,
-                        ActionBy = Session["UserId"].ToString()
+                        ActionBy = Session["UserName"].ToString()
                     };
 
                     manRepository.AddExpenseFormHistory(history);
-
                     manRepository.SaveChanges();
+                    Log.Info("Form status updated by Manager: " + Session["UserName"]);
                     var userId = Convert.ToInt32(Session["UserId"]);
                     TempData["SweetAlertMessage"] = "Expenses Status Updated Successfully!";
                     TempData["SweetAlertType"] = "success";

@@ -59,8 +59,8 @@ namespace ExpenseApplication.Controllers
                         {
                             Description = e.Description,
                             ExpenseDate = e.ExpenseDate,
-                            Amount = e.Amount,
-                            Status = ExpenseFormStatus.PendingApproval
+                            Amount = e.Amount
+                    
                         }).ToList(),
                         TotalAmount = model.Expenses.Sum(e => e.Amount),
                         Status = ExpenseFormStatus.PendingApproval
@@ -74,7 +74,8 @@ namespace ExpenseApplication.Controllers
                         ChangeDate = DateTime.Now,
                         OldStatus = ExpenseFormStatus.PendingApproval,
                         NewStatus = ExpenseFormStatus.PendingApproval,
-                        Remarks = "No Remarks Yet"
+                        Remarks = "No Remarks Yet",
+                        ActionBy= Session["UserName"].ToString()
 
                     };
 
@@ -132,7 +133,12 @@ namespace ExpenseApplication.Controllers
                 var form = empRepository.GetExpenseFormById(id);
                 if (form == null)
                 {
-                    return HttpNotFound();
+                    return RedirectToAction("Index", "Home");
+                }
+
+                if (form.Status == ExpenseFormStatus.Approved || form.Status == ExpenseFormStatus.Paid)
+                {
+                    return RedirectToAction("Index", "Home");
                 }
 
                 var viewModel = new ExpenseFormViewModel
@@ -192,6 +198,17 @@ namespace ExpenseApplication.Controllers
                         form.Expenses.Add(newExpense);
                     }
 
+                    var latestHistory = form.History.OrderByDescending(h => h.ChangeDate).FirstOrDefault();
+                    var history = new ExpenseFormHistory()
+                    {
+                        ExpenseFormId = form.Id,
+                        ChangeDate = DateTime.Now,
+                        OldStatus = latestHistory.NewStatus,
+                        NewStatus = latestHistory.NewStatus,
+                        Remarks = "Form Editted by Employee",
+                        ActionBy = Session["UserName"].ToString()
+                    };
+                    empRepository.AddExpenseFormHistory(history);
                     empRepository.SaveChanges();
 
                     TempData["SweetAlertMessage"] = "Expenses Edited successfully!";

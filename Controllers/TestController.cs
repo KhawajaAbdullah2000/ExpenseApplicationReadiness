@@ -22,14 +22,14 @@ namespace ExpenseApplication.Controllers
                 Username = "Azizullah",
                 Password = HashedPassword,
                 Role = UserRole.Admin,
-                Email = "admin@gmail.com",
-               
+                Email = "admin@gmail.com"
+         
+
 
             };
            context.Users.Add(user);
             context.SaveChanges();  
 
-          //  var matchedPassword=Crypto.VerifyHashedPassword(HashedPassword,password);
 
             
             return true;

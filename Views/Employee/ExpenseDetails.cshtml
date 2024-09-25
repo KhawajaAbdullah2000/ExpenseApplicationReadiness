@@ -12,7 +12,7 @@
         </div>
         <div class="card-body">
             <h5 class="card-title">Form ID: @Model.ExpenseForm.Id</h5>
-            <p class="card-text"><strong>Date Submitted:</strong> @Model.ExpenseForm.DateSubmitted.ToShortDateString()</p>
+            <p class="card-text"><strong>Date Submitted:</strong> @Model.ExpenseForm.DateSubmitted.ToString("dd-MMM-yyyy")</p>
             <p class="card-text"><strong>Currency:</strong> @Model.ExpenseForm.Currency</p>
             <p class="card-text"><strong>Status:</strong> @Model.ExpenseForm.Status</p>
             <p class="card-text"><strong>Remarks:</strong> @Model.LatestRemark</p>
@@ -39,7 +39,7 @@
                 {
                     <tr>
                         <td>@expense.Description</td>
-                        <td>@expense.ExpenseDate.ToShortDateString()</td>
+                        <td>@expense.ExpenseDate.ToString("dd-MMM-yyyy")</td>
                         <td>@expense.Amount</td>
                     </tr>
                 }

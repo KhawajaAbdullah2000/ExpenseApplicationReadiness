@@ -19,8 +19,6 @@ namespace ExpenseApplication.Controllers
     [AuthFilter]
     public class HomeController : Controller
     {
-        // private readonly ExpenseDbContext context = new ExpenseDbContext();
-
         private IAdmin adminRepository;
         private IManager manRepository;
         private IEmployee empRepository;
@@ -85,10 +83,10 @@ namespace ExpenseApplication.Controllers
             {
                 var statusCounts = adminRepository.GetExpenseFormStatusCounts();
 
-                // Prepare data points for the chart
+                // Prepare data points for the Pie chart
                 List<DataPointPieChart> dataPoints = statusCounts.Select(s => new DataPointPieChart(s.Status, s.Count)).ToList();
 
-                // Pass data to the view using ViewBag
+            
                 ViewBag.DataPoints = JsonConvert.SerializeObject(dataPoints);
 
                 var employeeForms = adminRepository.GetEmployeeFormCounts();
@@ -100,10 +98,10 @@ namespace ExpenseApplication.Controllers
 
                 var managerEmployees = adminRepository.GetManagerEmployeeCounts();
 
-                // Prepare data points for the chart
+                // Prepare data points for the Bar chart
                 var ManagerEmployees = managerEmployees.Select(m => new DataPointBarChart(m.ManagerName, m.EmployeeCount)).ToList();
 
-                // Pass the data to the view via ViewBag
+              
                 ViewBag.ManagerEmployeeData = JsonConvert.SerializeObject(ManagerEmployees);
 
 

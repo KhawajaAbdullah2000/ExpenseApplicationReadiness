@@ -13,7 +13,6 @@ namespace ExpenseApplication.Controllers
 {
     public class LoginController : Controller
     {
-        //private readonly ExpenseDbContext context = new ExpenseDbContext();
         private IEmployee empRepository;
         public LoginController()
         {

@@ -52,11 +52,11 @@ namespace ExpenseApplication.Controllers
                     }
                 }
 
-                int pageSize = 10; 
+                int pageSize = 6; 
                 int pageNumber = (page ?? 1); // Page number default  1
                 var pagedExpenseForms = expenseForms.OrderByDescending(e => e.DateSubmitted).ToPagedList(pageNumber, pageSize);
                 return View(pagedExpenseForms);
-                //return View(expenseForms.ToList());
+                
             }
             catch (Exception ex)
             {

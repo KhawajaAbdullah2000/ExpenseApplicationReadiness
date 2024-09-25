@@ -22,6 +22,7 @@
                                     <th>Previous Status</th>
                                     <th>New Status</th>
                                     <th>Remarks</th>
+                                    <th>Action By</th>
 
                                 </tr>
                             </thead>
@@ -29,10 +30,11 @@
                                 @foreach (var transaction in Model)
                                 {
                                     <tr>
-                                        <td>@transaction.ChangeDate.ToString("dd/MM/yyyy")</td>
+                                        <td>@transaction.ChangeDate.ToString("dd-MMM-yyyy")</td>
                                         <td>@transaction.OldStatus</td>
                                         <td>@transaction.NewStatus</td>
                                         <td>@transaction.Remarks</td>
+                                        <td>@transaction.ActionBy</td>
                                     </tr>
                                 }
                             </tbody>

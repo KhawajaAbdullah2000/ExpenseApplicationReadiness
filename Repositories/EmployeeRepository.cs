@@ -13,6 +13,11 @@ namespace ExpenseApplication.Repositories
     {
         private ExpenseDbContext context;
 
+        public EmployeeRepository(ExpenseDbContext dataContext)
+        {
+            this.context = dataContext;
+        }
+
         public User FetchUser(LoginViewModel user)
         {
             var userRecord = context.Users
@@ -25,10 +30,7 @@ namespace ExpenseApplication.Repositories
 
             return null;
         }
-        public EmployeeRepository(ExpenseDbContext dataContext)
-        {
-            this.context = dataContext;
-        }
+     
 
         public void AddExpense(ExpenseForm form)
         {
@@ -62,7 +64,8 @@ namespace ExpenseApplication.Repositories
         public IQueryable<ExpenseForm> GetExpenseFormsByUserId(int userId)
         {
             return context.ExpenseForms
-                           .Where(e => e.UserId == userId);
+                           .Where(e => e.UserId == userId)
+                           .OrderByDescending(e=>e.Id);
         }
 
         public void SaveChanges()
